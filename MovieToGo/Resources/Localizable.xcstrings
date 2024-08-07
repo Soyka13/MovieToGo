@@ -1,0 +1,50 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "favourites_tab_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favourite"
+          }
+        }
+      }
+    },
+    "home_tab_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        }
+      }
+    },
+    "movie_alert_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Movie"
+          }
+        }
+      }
+    },
+    "release" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Release"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
