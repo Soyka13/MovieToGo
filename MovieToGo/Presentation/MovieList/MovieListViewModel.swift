@@ -11,10 +11,9 @@ import Combine
 final class MovieListViewModel: ObservableObject {
     
     @Published private(set) var isPaginating = false
-    @Published private(set) var isRefreshing = false
+    @Published private(set) var publishedIndexPaths: Result<[IndexPath], APIError>?
     
-    let indexPathProvider = PassthroughSubject<[IndexPath], APIError>()
-    let selectedMovieObserver = PassthroughSubject<Movie, Error>()
+    let selectedMovieObserver = PassthroughSubject<Movie, Never>()
     
     private(set) var movies: [Movie] = []
     
@@ -39,21 +38,16 @@ final class MovieListViewModel: ObservableObject {
         }
         
         guard currentPage <= totalPages else {
-            self.isRefreshing = false
             return
         }
         
         isPaginating = true
-        self.isRefreshing = isRefreshing
         
         movieUseCase.getMovies(page: currentPage)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
-                self?.isPaginating = false
-                self?.isRefreshing = false
-                
                 if case .failure(let error) = completion {
-                    self?.indexPathProvider.send(completion: .failure(error))
+                    self?.publishedIndexPaths = .failure(error)
                 }
             } receiveValue: { [weak self] movieResult in
                 guard let self = self else { return }
@@ -63,13 +57,15 @@ final class MovieListViewModel: ObservableObject {
                 let indexPaths = (self.movies.count - movieResult.results.count ..< self.movies.count)
                     .map { IndexPath(row: $0, section: 0) }
                 
-                self.indexPathProvider.send(indexPaths)
+                self.publishedIndexPaths = .success(indexPaths)
                 
                 self.currentPage += 1
                 
                 if let totalPages = movieResult.totalPages {
                     self.totalPages = totalPages
                 }
+                
+                self.isPaginating = false
             }
             .store(in: &cancellables)
     }
@@ -80,6 +76,7 @@ final class MovieListViewModel: ObservableObject {
     
     private func reset() {
         movies = []
+        publishedIndexPaths = .success([])
         currentPage = 1
         totalPages = 1
     }

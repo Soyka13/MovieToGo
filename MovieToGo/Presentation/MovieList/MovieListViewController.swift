@@ -24,6 +24,8 @@ class MovieListViewController: UIViewController, StoryboardInstantiable, Alertab
         return spinner
     }()
     
+    private var isRefreshing = false
+    
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -31,10 +33,6 @@ class MovieListViewController: UIViewController, StoryboardInstantiable, Alertab
         setup()
         setupBindings()
         viewModel?.fetchMovies()
-    }
-    
-    @objc func reload() {
-        viewModel?.fetchMovies(isRefreshing: true)
     }
     
     private func setup() {
@@ -48,33 +46,35 @@ class MovieListViewController: UIViewController, StoryboardInstantiable, Alertab
     }
     
     private func setupBindings() {
-        viewModel?.$isRefreshing
+        viewModel?.$publishedIndexPaths
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isLoading in
-                if !isLoading {
-                    self?.refreshControl.endRefreshing()
-                }
-            }
-            .store(in: &cancellables)
-        
-        viewModel?.indexPathProvider
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.tableView.tableFooterView = nil
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                self.tableView.tableFooterView = nil
                 
-                if case .failure(let error) = completion {
-                    self?.showAlert(title: "Error", message: error.description)
-                }
-            }, receiveValue: { [weak self] indexPaths in
-                if self?.refreshControl.isRefreshing == true {
-                    self?.tableView.reloadData()
-                } else {
-                    self?.tableView.beginUpdates()
-                    self?.tableView.insertRows(at: indexPaths, with: .bottom)
-                    self?.tableView.endUpdates()
+                switch result {
+                case .success(let indexPaths):
+                    if self.isRefreshing {
+                        self.tableView.reloadData()
+                        self.isRefreshing = false
+                    } else {
+                        self.tableView.beginUpdates()
+                        self.tableView.insertRows(at: indexPaths, with: .bottom)
+                        self.tableView.endUpdates()
+                    }
+                case .failure(let error):
+                    self.showAlert(title: String(localized: "error_alert_title"), message: error.description)
+                case .none:
+                    break
                 }
             })
             .store(in: &cancellables)
+    }
+    
+    @objc private func reload() {
+        isRefreshing = true
+        refreshControl.endRefreshing()
+        viewModel?.fetchMovies(isRefreshing: true)
     }
 }
 

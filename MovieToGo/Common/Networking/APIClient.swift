@@ -15,7 +15,10 @@ protocol APIClientInterface {
 
 class APIClient: APIClientInterface {
     
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private let session: URLSession = {
+        let config = URLSessionConfiguration.default
+        return URLSession(configuration: config)
+    }()
     
     func fetch<T: Decodable>(with request: URLRequest?) -> AnyPublisher<T, APIError> {
         guard let request = request else {

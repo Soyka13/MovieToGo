@@ -15,10 +15,10 @@ extension Alertable where Self: UIViewController {
         title: String = "",
         message: String,
         preferredStyle: UIAlertController.Style = .alert,
-        completion: (() -> Void)? = nil
+        actions: [UIAlertAction] = [UIAlertAction(title: "OK", style: .default, handler: nil)]
     ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: completion)
+        actions.forEach { alert.addAction($0) }
+        present(alert, animated: true, completion: nil)
     }
 }
