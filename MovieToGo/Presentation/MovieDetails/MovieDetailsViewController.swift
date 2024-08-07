@@ -10,7 +10,7 @@ import Combine
 
 class MovieDetailsViewController: UIViewController, StoryboardInstantiable, Alertable {
     
-    @IBOutlet weak var posterImageView: GradientImageView!
+    @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -45,6 +45,13 @@ class MovieDetailsViewController: UIViewController, StoryboardInstantiable, Aler
         navigationItem.titleView = UIImageView(image: UIImage(named: UI.Images.logo))
         
         posterImageView.layer.cornerRadius = UI.Constants.imageCornerRadius
+        
+        let colors = [
+            UIColor(red: 101/255, green: 101/255, blue: 101/255, alpha: 0).cgColor, // rgba(101, 101, 101, 0)
+            UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 1).cgColor  // rgba(34, 34, 34, 1)
+        ]
+        
+        posterImageView.makeGradient(with: colors)
     }
     
     private func setupData() {

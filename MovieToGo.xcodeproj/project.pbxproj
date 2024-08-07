@@ -53,11 +53,11 @@
 		538CFB9D2C61FDA500397451 /* Raleway-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53F8AA822C5FD5340065A9CD /* Raleway-SemiBoldItalic.ttf */; };
 		538CFB9E2C61FDA500397451 /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53F8AA712C5FD5340065A9CD /* Raleway-Thin.ttf */; };
 		538CFB9F2C61FDA500397451 /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53F8AA792C5FD5340065A9CD /* Raleway-ThinItalic.ttf */; };
+		53A8CBD72C638436008ABEA7 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8CBD62C638436008ABEA7 /* UIView+Extensions.swift */; };
 		53F8AA852C5FF6420065A9CD /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8AA842C5FF6420065A9CD /* MovieDetailsViewController.swift */; };
 		53F8AA872C5FF64C0065A9CD /* MovieDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F8AA862C5FF64C0065A9CD /* MovieDetailsViewController.storyboard */; };
 		53F8AA892C5FF6750065A9CD /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8AA882C5FF6750065A9CD /* MovieDetailsViewModel.swift */; };
 		53F8AA8B2C5FF67E0065A9CD /* MovieDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8AA8A2C5FF67E0065A9CD /* MovieDetailsCoordinator.swift */; };
-		53F8AA8E2C5FFE6B0065A9CD /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8AA8D2C5FFE6B0065A9CD /* GradientImageView.swift */; };
 		53F8AA902C601BA70065A9CD /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8AA8F2C601BA70065A9CD /* Alertable.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +92,7 @@
 		53830C262C615A110065CC51 /* MoviesRemoteDataSourceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRemoteDataSourceInterface.swift; sourceTree = "<group>"; };
 		53830C2B2C615D2A0065CC51 /* MovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCase.swift; sourceTree = "<group>"; };
 		53830C2D2C6167E30065CC51 /* MovieListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCellViewModel.swift; sourceTree = "<group>"; };
+		53A8CBD62C638436008ABEA7 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		53F8AA712C5FD5340065A9CD /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
 		53F8AA722C5FD5340065A9CD /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
 		53F8AA732C5FD5340065A9CD /* Raleway-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
@@ -114,7 +115,6 @@
 		53F8AA862C5FF64C0065A9CD /* MovieDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MovieDetailsViewController.storyboard; sourceTree = "<group>"; };
 		53F8AA882C5FF6750065A9CD /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		53F8AA8A2C5FF67E0065A9CD /* MovieDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCoordinator.swift; sourceTree = "<group>"; };
-		53F8AA8D2C5FFE6B0065A9CD /* GradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
 		53F8AA8F2C601BA70065A9CD /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,7 +197,7 @@
 				531C26412C5FAE7700269E28 /* StoryboardInstantiable.swift */,
 				53830C162C6154390065CC51 /* Flow */,
 				53830C0D2C61519F0065CC51 /* Networking */,
-				53F8AA8C2C5FFD6C0065A9CD /* Components */,
+				53F8AA8C2C5FFD6C0065A9CD /* Extensions */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -365,12 +365,12 @@
 			path = Raleway;
 			sourceTree = "<group>";
 		};
-		53F8AA8C2C5FFD6C0065A9CD /* Components */ = {
+		53F8AA8C2C5FFD6C0065A9CD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				53F8AA8D2C5FFE6B0065A9CD /* GradientImageView.swift */,
+				53A8CBD62C638436008ABEA7 /* UIView+Extensions.swift */,
 			);
-			path = Components;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,7 +478,6 @@
 				531C263A2C5FAAA000269E28 /* MovieListViewModel.swift in Sources */,
 				53830C0F2C6151BA0065CC51 /* APIClient.swift in Sources */,
 				53830C222C6158340065CC51 /* ImageEndpoint.swift in Sources */,
-				53F8AA8E2C5FFE6B0065A9CD /* GradientImageView.swift in Sources */,
 				531C26522C5FBDA800269E28 /* Constants.swift in Sources */,
 				53830C272C615A110065CC51 /* MoviesRemoteDataSourceInterface.swift in Sources */,
 				531C26502C5FBA0700269E28 /* MainTabBarItem.swift in Sources */,
@@ -492,6 +491,7 @@
 				531C26362C5FA95E00269E28 /* MovieListViewController.swift in Sources */,
 				53F8AA8B2C5FF67E0065A9CD /* MovieDetailsCoordinator.swift in Sources */,
 				531C26422C5FAE7700269E28 /* StoryboardInstantiable.swift in Sources */,
+				53A8CBD72C638436008ABEA7 /* UIView+Extensions.swift in Sources */,
 				531C26092C5F677400269E28 /* SceneDelegate.swift in Sources */,
 				531C263C2C5FAB4300269E28 /* MovieListCoordinator.swift in Sources */,
 				53830C152C6153770065CC51 /* Endpoint.swift in Sources */,
