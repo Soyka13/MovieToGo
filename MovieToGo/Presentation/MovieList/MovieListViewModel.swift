@@ -10,7 +10,7 @@ import Combine
 
 final class MovieListViewModel: ObservableObject {
     
-    @Published private(set) var isPaginating = false
+    @Published private(set) var isLoading = false
     @Published private(set) var publishedIndexPaths: Result<[IndexPath], APIError>?
     
     let selectedMovieObserver = PassthroughSubject<Movie, Never>()
@@ -37,11 +37,11 @@ final class MovieListViewModel: ObservableObject {
             reset()
         }
         
-        guard currentPage <= totalPages else {
+        guard !isLoading && currentPage <= totalPages else {
             return
         }
         
-        isPaginating = true
+        isLoading = true
         
         movieUseCase.getMovies(page: currentPage)
             .receive(on: DispatchQueue.main)
@@ -65,7 +65,7 @@ final class MovieListViewModel: ObservableObject {
                     self.totalPages = totalPages
                 }
                 
-                self.isPaginating = false
+                self.isLoading = false
             }
             .store(in: &cancellables)
     }
